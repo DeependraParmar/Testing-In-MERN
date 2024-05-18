@@ -1,0 +1,3 @@
+Traditionally, we either test the code using postman or by doing it with frontend automatically.
+
+What about I being able to somehow test my backend code without the need of frontend or postman using automated tests?
