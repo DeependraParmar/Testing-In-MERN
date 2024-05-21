@@ -9,8 +9,8 @@ const sumSchema = z.object({
     b: z.number(),
 });
 
-app.post("/sum", (req, res) => {
-    const parsedResponse = sumSchema.safeParse(req.body);
+app.post("/sum", async(req, res) => {
+    const parsedResponse = await sumSchema.safeParse(req.body);
     
     if(!parsedResponse.success){
         return res.status(411).json({
@@ -22,3 +22,20 @@ app.post("/sum", (req, res) => {
         answer: parsedResponse.data.a + parsedResponse.data.b,
     })
 });
+
+app.get("/sum", async (req, res) => {
+    const parsedResponse = await sumSchema.safeParse({
+        a: Number(req.headers["a"]),
+        b: Number(req.headers["b"])
+    });
+
+    if(!parsedResponse.success){
+        return res.status(411).json({
+            message: "Invalid Inputs"
+        });
+    }
+
+    return res.status(200).json({
+        answer: parsedResponse.data.a + parsedResponse.data.b
+    })
+})
