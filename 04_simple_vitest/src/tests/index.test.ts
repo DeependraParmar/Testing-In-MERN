@@ -3,14 +3,20 @@ import request from "supertest";
 import { app } from "../index";
 
 
-// mocking the db call whenever prisma.sum.create is called.....
-vi.mock("../db", () => ({
-    prisma: {
-        sum: {
-            create: vi.fn()
-        }
-    }
-}));
+// mocking the db call whenever prisma.sum.create is 
+// Problem with this approach is that as time goes by, the functional and object keeps on increasing and with that, you have to manually mock them out. In order to get rid of this, you have the concept of deep mocking present in src/__mocks__/db.ts
+// vi.mock("../db", () => {
+//     return {
+//         prisma: {
+//             sum: {
+//                 create: vi.fn()
+//             }
+//         }
+//     }
+// });
+
+vi.mock("../db");
+
 
 describe("Post /sum", () => {
     it("Return sum of two +ve numbers", async () => {
