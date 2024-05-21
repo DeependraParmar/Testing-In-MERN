@@ -1,5 +1,6 @@
 import express from "express";
 import { z } from "zod";
+import { prisma } from "./db";
 
 export const app = express();
 app.use(express.json());
@@ -17,6 +18,15 @@ app.post("/sum", async (req, res) => {
             message: "Invalid Inputs"
         });
     }
+
+    // mocking the database login here
+    await prisma.sum.create({
+        data: {
+            a: parsedResponse.data.a,
+            b: parsedResponse.data.b,
+            result: parsedResponse.data.a + parsedResponse.data.b,
+        }
+    })
 
     res.status(200).json({
         answer: parsedResponse.data.a + parsedResponse.data.b,

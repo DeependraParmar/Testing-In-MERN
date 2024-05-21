@@ -1,6 +1,16 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import request from "supertest";
 import { app } from "../index";
+
+
+// mocking the db call whenever prisma.sum.create is called.....
+vi.mock("../db", () => ({
+    prisma: {
+        sum: {
+            create: vi.fn()
+        }
+    }
+}));
 
 describe("Post /sum", () => {
     it("Return sum of two +ve numbers", async () => {
