@@ -12,3 +12,16 @@ Mocking is the process of faking the process of hitting the data / external serv
 Until this point of mocking the db calls and external services, everything seems to work well but problem arises when you start storing the wrong data in the db and then you start testing the wrong data. The tests are still passing but somthing flicky is going on in the logic.
 
 Here comes the important concept of Spying. Spying means keeping an eye on the function call even if the call is mocked out in order to check if the function is called with the right arguments or not.
+
+
+
+Integration Test: Testing the whole system together in which we do start all the services locally making them up and testing it.
+Downsides:
+    1. slower in nature
+    2. more prone to errors and add more complexity to the testing environment due to running the local services but eventually reduces the code for testing the services.
+    3. things like docker is required to start all the auxillary services like db, redis, kafka, etc.
+
+Before writing the test, you should be ready with:
+    1. code that brings the local services up.
+    2. seeds the data, tables in the db.
+    3. tear down the services after the test is done.
