@@ -20,7 +20,9 @@ app.post("/sum", async (req, res) => {
     }
 
     // mocking the database login here
-    await prisma.sum.create({
+    // also getting the mockResolveValue in order to get rid of the runtime error caused due to request as undefined if below request would be mocked.
+
+    const request = await prisma.sum.create({
         data: {
             a: parsedResponse.data.a,
             b: parsedResponse.data.b,
@@ -30,6 +32,7 @@ app.post("/sum", async (req, res) => {
 
     res.status(200).json({
         answer: parsedResponse.data.a + parsedResponse.data.b,
+        id: request.id,
     })
 });
 

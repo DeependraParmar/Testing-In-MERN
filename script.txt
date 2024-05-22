@@ -4,3 +4,11 @@ What about I being able to somehow test my backend code without the need of fron
 
 We'll use libraries like jest and vitest to do it.
 For testing http-servers: use supertest
+
+
+Mocking is the process of faking the process of hitting the data / external services and returning the data that we want to return.
+
+
+Until this point of mocking the db calls and external services, everything seems to work well but problem arises when you start storing the wrong data in the db and then you start testing the wrong data. The tests are still passing but somthing flicky is going on in the logic.
+
+Here comes the important concept of Spying. Spying means keeping an eye on the function call even if the call is mocked out in order to check if the function is called with the right arguments or not.
