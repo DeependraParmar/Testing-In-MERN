@@ -5,3 +5,5 @@ echo "🟢 Database is ready & up"
 npx prisma migrate dev --name init
 npm run test
 docker-compose down 
+echo "🔵 Process complete and auxillaries turned down"
+
